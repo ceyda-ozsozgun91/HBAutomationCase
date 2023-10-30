@@ -24,8 +24,10 @@ public class ProductPage extends PageHelper{
         assertLocation(addToCartButton);
     }
 
-    public void clickAddToChartButton(){
+    public void clickAddToChartButton() throws InterruptedException {
         click(addToCartButton);
+        Thread.sleep(2000);
+
 
     }
 

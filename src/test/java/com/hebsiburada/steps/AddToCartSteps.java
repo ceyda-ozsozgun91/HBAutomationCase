@@ -40,30 +40,23 @@ public class AddToCartSteps {
 
     }
     @Given("Kullanici kategorideki bir urunu sepetine ekler")
-    public void AddToCartSecondStep()  {
+    public void AddToCartSecondStep() throws InterruptedException {
 
         //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(20L));
-        PetshopCategoryPage page =new PetshopCategoryPage();
-        ProductPage productPage= new ProductPage();
         actions.addToChardThirdProduct();
-        //productPage.clickAddToChartButton();
-        //wait.until(ExpectedConditions.element(page.thirdProduct));
 
         System.out.println("Kullanici kategorideki bir urunu sepetine ekledi");
     }
 
     @Given("Kullanici sepetine gider")
     public void AddToCartThirdStep(){
-        ProductPage productPage= new ProductPage();
-        productPage.clickGoToBasketFromProductPage();
+        actions.clickGoToBasketFromProductPage();
         System.out.println("Kullanici sepetine gitti");
     }
 
     @Then("kullanici sepetindeki ürünü ve fiyatini kontrol eder")
     public void AddToCartFourthStep(){
-        BasketPage basketPage= new BasketPage();
-        basketPage.assertEquals(basketPage.totalBasketPrice,"616,46");
-        basketPage.assertEquals(basketPage.productNameInBasket,basketPage.getexpectedProductNameString());
+        actions.checkBasket();
         System.out.println("Sepetteki ürün ve fiyat kontrol edildi.");
     }
 

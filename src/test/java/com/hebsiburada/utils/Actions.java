@@ -26,12 +26,6 @@ public class Actions {
     public void InitializeDriver(){
         driver= Driver.getDriver();
         driver.manage().window().maximize();
-        this.homePage = new HomePage();
-        this.loginPage = new LoginPage();
-        this.petshopCategoryPage= new PetshopCategoryPage();
-        this.productsFomAbroadPage= new ProductsFromAbroadPage();
-        this.productPage=new ProductPage();
-        this.basketPage=new BasketPage();
         driver.get("https://www.hepsiburada.com");
         //driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20L));
@@ -67,19 +61,20 @@ public class Actions {
 
     }
 
-    public void addToChardThirdProduct(){
+    public void addToChardThirdProduct() throws InterruptedException {
         petshopCategoryPage= new PetshopCategoryPage();
         petshopCategoryPage.clickThirdProduct();
         productPage= new ProductPage();
         productPage.clickAddToChartButton();
 
+
     }
 
     public void clickGoToBasketFromProductPage()
     {
-        this.productPage=new ProductPage();
+        productPage=new ProductPage();
         productPage.clickGoToBasketFromProductPage();
-        this.basketPage=new BasketPage();
+        basketPage=new BasketPage();
 
     }
 
@@ -94,6 +89,12 @@ public class Actions {
         basketPage.clickDeleteProductsButton();
         basketPage.clickDeleteAllConfirmationSuccessButton();
         basketPage.assertLocation(basketPage.noProductInBasketValidationMessage);
+    }
+
+    public void checkBasket(){
+        basketPage= new BasketPage();
+        basketPage.assertEquals(basketPage.totalBasketPrice,"616,46");
+        basketPage.assertEquals(basketPage.productNameInBasket,basketPage.getexpectedProductNameString());
     }
 
 
